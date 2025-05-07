@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Mail!</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background">
+        <!-- Floating balloons -->
+        <div class="balloon" style="left: 10%; top: 20%;"></div>
+        <div class="balloon" style="left: 20%; top: 40%;"></div>
+        <div class="balloon" style="left: 30%; top: 30%;"></div>
+        <div class="balloon" style="left: 70%; top: 20%;"></div>
+        <div class="balloon" style="left: 80%; top: 40%;"></div>
+        <div class="balloon" style="left: 90%; top: 30%;"></div>
+        
+        <!-- Floating stars -->
+        <div class="star" style="left: 15%; top: 60%;"></div>
+        <div class="star" style="left: 25%; top: 80%;"></div>
+        <div class="star" style="left: 35%; top: 70%;"></div>
+        <div class="star" style="left: 75%; top: 60%;"></div>
+        <div class="star" style="left: 85%; top: 80%;"></div>
+        <div class="star" style="left: 95%; top: 70%;"></div>
+    </div>
+
+    <div class="container">
+        <div class="envelope" id="envelope" onclick="showLetter()">
+            <div class="envelope-flap"></div>
+            <div class="envelope-content">
+                <div class="stamp">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="envelope-text">
+                    <h2>Happy Birthday!</h2>
+                    <p>Click to open</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="letter-popup" id="letterPopup" onclick="handlePopupClick(event)">
+        <div class="letter-content">
+            <button class="close-btn" id="closePopup" onclick="hideLetter()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="letter-header">
+                <div class="letter-stamp">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h2>Happy Birthday!</h2>
+            </div>
+            <div class="letter-body">
+                <p>Hi Babe,</p>
+                <p>Happy 22nd Birthday sa'yo bebe, enjoyin mo ung birthday mo at tanders kana</p>
+                <p>laban lang sa mga challenges mo, i'm here lang para supportahan ka</p>
+                <p>i love you so much po bebe, ket ang acm mo po jk HAHA 😘!!</p>
+                <p>I hope this message will make you smile and happy 😘</p>
+
+                <p class="signature">Your love,<br>Xyphery</p>
+            </div>
+            <div class="confetti"></div>
+        </div>
+    </div>
+
+    <script>
+        // Simple function to show the popup
+        function showLetter() {
+            const popup = document.getElementById('letterPopup');
+            popup.style.display = 'flex';
+            popup.style.opacity = '1';
+            createConfetti();
+        }
+
+        // Simple function to hide the popup
+        function hideLetter() {
+            const popup = document.getElementById('letterPopup');
+            popup.style.display = 'none';
+            popup.style.opacity = '0';
+        }
+
+        // Handle click outside the letter
+        function handlePopupClick(event) {
+            if (event.target === document.getElementById('letterPopup')) {
+                hideLetter();
+            }
+        }
+
+        // Confetti animation
+        function createConfetti() {
+            const confettiContainer = document.querySelector('.confetti');
+            const colors = ['#ff9a9e', '#fad0c4', '#ffd93d', '#4ecdc4', '#ff6b6b'];
+            
+            // Clear existing confetti
+            confettiContainer.innerHTML = '';
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'absolute';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = -20 + 'px';
+                confetti.style.opacity = Math.random() + 0.5;
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                
+                confettiContainer.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        // Add confetti animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                }
+                100% {
+                    transform: translateY(100vh) rotate(360deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html> 
